@@ -1,3 +1,5 @@
+## gff3_list for example:
+
 for i in $(cat gff3_list)
 do
     j=${i%/*}
