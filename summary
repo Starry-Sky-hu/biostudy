@@ -1,0 +1,4 @@
+## busco summary
+
+for i in $(cat busco_list); do echo -n "${i}"; cat ${i} | grep "C:"; done
+
