@@ -24,8 +24,8 @@ ls | grep "${i}" > list
 for j in $(cat list)
 do
   cd ${j}
-  mv *_1.fastq ${i}_1.fq
-  mv *_2.fastq ${i}_2.fq
+  mv *_1.fastq ${j}_1.fq
+  mv *_2.fastq ${j}_2.fq
   cd ..
 done
 
