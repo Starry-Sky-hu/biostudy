@@ -3,7 +3,7 @@
 conda create -n sra
 source activate sra
 conda install sra-tools
-awk -F ',' '{print $1}' SraRunTable.txt > SRR_list
+awk -F ',' '{print $1}' SraRunTable.txt | grep -v "Run" > SRR_list
 ## SRR_list is list of SRR
 prefetch --option-file SRR_list
 ## --defline-seq header add '1' in 1.fastq, add '2' in 2.fastq
@@ -31,3 +31,32 @@ done
 
 mkdir SRR
 mv */*sra SRR
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## bug
+## rm: cannot remove '.ps_0000025b4fa5560100000049': Device or resoure busy
+## acheieve process id
+lsof |grep ps_0000025
+## 
+kill
+
