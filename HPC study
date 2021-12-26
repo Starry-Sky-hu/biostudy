@@ -21,9 +21,9 @@ sh download.sh
 
 rename SRR ${i}_SRR *
 ls | grep "${i}" > list
-for i in $(cat list)
+for j in $(cat list)
 do
-  cd ${i}
+  cd ${j}
   mv *_1.fastq ${i}_1.fq
   mv *_2.fastq ${i}_2.fq
   cd ..
