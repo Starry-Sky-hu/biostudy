@@ -60,3 +60,11 @@ lsof |grep ps_0000025
 ## 
 kill
 
+
+
+## scp 不用输密码
+ssh-keygen -t rsa
+chmod 755 ~/.ssh
+将~/.ssh/id_rsa.pub复制到另一台机器上的~/.ssh/authorized_keys文件中
+
+
