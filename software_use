@@ -1,0 +1,4 @@
+## seqkit
+#fasta多行变一行
+seqkit seq -w 0
+
