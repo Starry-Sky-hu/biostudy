@@ -67,4 +67,6 @@ ssh-keygen -t rsa
 chmod 755 ~/.ssh
 将~/.ssh/id_rsa.pub复制到另一台机器上的~/.ssh/authorized_keys文件中
 
+.ssh目录的权限必须是700
+.ssh/authorized_keys文件权限必须是600
 
