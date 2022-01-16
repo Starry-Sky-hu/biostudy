@@ -1,4 +1,4 @@
-## seqkit
+## seqkit https://bioinf.shenwei.me/seqkit/
 #fasta多行变一行
 seqkit seq -w 0
 
