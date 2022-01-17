@@ -12,14 +12,19 @@ SINGULARITYENV_PREPEND_PATH="/opt/conda/envs/pasa/bin" \
 singularity exec GenomeAnnotationContainer_v0.3 \
 	/opt/conda/envs/pasa/opt/pasa-2.4.1/scripts/Load_Current_Gene_Annotations.dbi \
 	-c pasa.alignAssembly.txt \
-	-g Przewalskia_tangutica_hifiasm.bp.p_ctg.fasta \
-	-P Przewalskia_tangutica_maker_merge_filter.gff3
+	-g Solanum_aculeatissimum_hifiasm.bp.p_ctg.fasta \
+	-P Solanum_aculeatissimum_maker_merge_filter.gff3
 
 SINGULARITYENV_PREPEND_PATH="/opt/conda/envs/pasa/bin" \
 singularity exec GenomeAnnotationContainer_v0.3 \
 	/opt/conda/envs/pasa/opt/pasa-2.4.1/Launch_PASA_pipeline.pl \
 	-c pasa.annotationCompare.txt -A \
-	-g Przewalskia_tangutica_hifiasm.bp.p_ctg.fasta \
-	-t Przewalskia_tangutica_hifiasm_transcripts.fasta.clean
+	-g Solanum_aculeatissimum_hifiasm.bp.p_ctg.fasta \
+	-t Solanum_aculeatissimum_hifiasm_transcripts.fasta.clean
+
+grep -Ev "^#|^$" Solanum_aculeatissimum_hifiasm_db.gene_structures_post_PASA_updates.22495.gff3 > Solanum_aculeatissimum_hifiasm_db.gene_structures_post_PASA_updates.gff3
+
+perl ~/software/longest_transcript.pl Solanum_aculeatissimum_hifiasm_db.gene_structures_post_PASA_updates.gff3 > Solanum_aculeatissimum_hifiasm_db.gene_structures_post_PASA_updates_longest.gff3
+
 
 
