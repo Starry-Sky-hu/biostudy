@@ -2,3 +2,24 @@
 #fasta多行变一行
 seqkit seq -w 0
 
+
+
+
+
+
+## PASA update gff
+SINGULARITYENV_PREPEND_PATH="/opt/conda/envs/pasa/bin" \
+singularity exec GenomeAnnotationContainer_v0.3 \
+	/opt/conda/envs/pasa/opt/pasa-2.4.1/scripts/Load_Current_Gene_Annotations.dbi \
+	-c pasa.alignAssembly.txt \
+	-g Przewalskia_tangutica_hifiasm.bp.p_ctg.fasta \
+	-P Przewalskia_tangutica_maker_merge_filter.gff3
+
+SINGULARITYENV_PREPEND_PATH="/opt/conda/envs/pasa/bin" \
+singularity exec GenomeAnnotationContainer_v0.3 \
+	/opt/conda/envs/pasa/opt/pasa-2.4.1/Launch_PASA_pipeline.pl \
+	-c pasa.annotationCompare.txt -A \
+	-g Przewalskia_tangutica_hifiasm.bp.p_ctg.fasta \
+	-t Przewalskia_tangutica_hifiasm_transcripts.fasta.clean
+
+
