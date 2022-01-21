@@ -1,8 +1,10 @@
 ## seqkit https://bioinf.shenwei.me/seqkit/
 #fasta多行变一行
 seqkit seq -w 0
-
-
+# 根据区间提取序列
+seqkit subseq Tubocapsicum_anomalum.fa --chr Chr_5 -r 225396723:228924963 -o block_1.fa
+# 根据bed文件提取序列
+seqkit subseq --bed Solanum_tuberosumDM_colgene_sort.bed -u 5000 -d 5000 Solanum_tuberosumDM.fa > Solanum_tuberosumDM_colgene.fa
 
 
 
