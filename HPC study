@@ -24,21 +24,21 @@ sh download.sh
 for i in $(cat list)
 do
 	cd ${i}
-	rename ERR ${i}_ERR *
 	rename SRR ${i}_SRR *
-	ls | grep "${i}" | grep -v "list" > list
+	rename DRR ${i}_DRR *
+	rename ERR ${i}_ERR *
+	ls | grep "${i}_SRR" | grep -v "list" > list
+	ls | grep "${i}_ERR" | grep -v "list" >> list
+	ls | grep "${i}_DRR" | grep -v "list" >> list
 	for j in $(cat list)
 	do
-	  cd ${j}
-	  mv *_1.fastq ${j}_1.fq
-	  mv *_2.fastq ${j}_2.fq
-	  cd ..
+		cd ${j}
+		mv *_1.fastq.gz ${j}_1.fq.gz
+		mv *_2.fastq.gz ${j}_2.fq.gz
+		cd ..
 	done
-	
 	mkdir SRR
 	mv */*sra SRR
-	ls */*fq > fq_list
-	cp ../pigz.sh .
 	cd ..
 done
 
