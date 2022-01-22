@@ -33,3 +33,27 @@ perl ~/software/longest_transcript.pl Solanum_aculeatissimum_hifiasm_db.gene_str
 
 
 
+
+# minimap2 mapping
+minimap2 -t 52 -x asm5 -o Datura_inoxia_Datura_metel_5.paf Datura_inoxia.fa Datura_metel.fa
+# plot
+Rscript ~/software/co.R -i ${i} -o ${i%.paf*} -l -s -t -k 12 -p 9 -m 15000
+# mummer
+ref=Datura_inoxia.fa
+query=Datura_metel.fa
+prefix=Datura_inoxia_Datura_metel
+nucmer --mum -t 52 -p $prefix $ref $query
+delta-filter -i 90 -l 10000 -q ${prefix}.delta > ${prefix}.flt.delta
+show-coords -c -l -o -r -T ${prefix}.flt.delta >  ${prefix}.r.coords
+show-coords -c -l -o -q -T ${prefix}.flt.delta >  ${prefix}.q.coords
+mummerplot -t png -s large -p $prefix ${prefix}.flt.delta
+gnuplot ${prefix}.gp
+
+
+
+
+
+
+
+
+
