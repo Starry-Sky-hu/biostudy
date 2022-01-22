@@ -8,6 +8,9 @@ seqkit subseq --bed Solanum_tuberosumDM_colgene_sort.bed -u 5000 -d 5000 Solanum
 
 
 
+## pigz
+pigz -p 52 ${i}
+
 
 ## PASA update gff
 SINGULARITYENV_PREPEND_PATH="/opt/conda/envs/pasa/bin" \
