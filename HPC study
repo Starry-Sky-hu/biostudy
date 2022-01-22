@@ -21,18 +21,26 @@ awk '{print "wget http://public-genomes-ngs.molgen.mpg.de/SweetPotato/DOWNLOADS/
 sh download.sh
 
 
-rename SRR ${i}_SRR *
-ls | grep "${i}" > list
-for j in $(cat list)
+for i in $(cat list)
 do
-  cd ${j}
-  mv *_1.fastq ${j}_1.fq
-  mv *_2.fastq ${j}_2.fq
-  cd ..
+	cd ${i}
+	rename ERR ${i}_ERR *
+	rename SRR ${i}_SRR *
+	ls | grep "${i}" | grep -v "list" > list
+	for j in $(cat list)
+	do
+	  cd ${j}
+	  mv *_1.fastq ${j}_1.fq
+	  mv *_2.fastq ${j}_2.fq
+	  cd ..
+	done
+	
+	mkdir SRR
+	mv */*sra SRR
+	ls */*fq > fq_list
+	cp ../pigz.sh .
+	cd ..
 done
-
-mkdir SRR
-mv */*sra SRR
 
 
 
