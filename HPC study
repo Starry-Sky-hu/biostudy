@@ -8,9 +8,11 @@ awk -F ',' '{print $1}' SraRunTable.txt | grep -v "Run" > SRR_list
 prefetch --option-file SRR_list
 ## --defline-seq header add '1' in 1.fastq, add '2' in 2.fastq
 fastq-dump --defline-seq '@$sn[_$rn]/$ri' --split-files SRR5380901.sra
-
-
 ## or
+awk '{if($1~/@SRR/){print "@"$2}else{print $0}}' SRR16203910_1.fastq > SRR16203910_rmh_1.fastq
+awk '{if($1~/@SRR/){print "@"$2}else{print $0}}' SRR16203910_2.fastq > SRR16203910_rmh_2.fastq
+awk '{if(NR%4==1) {print $1"/1"} else {print} }' SRR16203910_rmh_1.fastq > SRR16203910_rmh_add_1.fastq
+awk '{if(NR%4==1) {print $1"/2"} else {print} }' SRR16203910_rmh_2.fastq > SRR16203910_rmh_add_2.fastq
 
 
 ## wget download date
