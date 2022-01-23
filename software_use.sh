@@ -10,6 +10,8 @@ seqkit subseq --bed Solanum_tuberosumDM_colgene_sort.bed -u 5000 -d 5000 Solanum
 
 ## pigz
 pigz -p 52 ${i}
+## gtz
+gtz -d file -z
 
 
 ## PASA update gff
