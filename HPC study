@@ -47,6 +47,122 @@ done
 
 
 
+# 仅打包并删除原文件
+tar -cvf ${i}.tar ${i} --remove-files
+
+# echo 打印不换行
+echo -e " \c"   
+# 多个空格替换成一个
+sed 's/  */ /g' file
+
+
+## 由于pasa的镜像在使用的时候经常出现需要密码的情况，而且不知道密码是什么，于是在docker中修改镜像，把账号需要密码的删除
+passwd -Sa  # 列出所有账号密码信息
+passwd -d user # 删除该用户密码
+## 经过修改，产生错误：su: using restricted shell /bin/false
+## su: cannot set groups: Operation not permitted
+## 上面的操作还是没有用，于是修改了 /etc/passwd 和 /etc/passwd- 两个文件
+
+
+
+braker2
+The config/ directory from AUGUSTUS can be accessed with the variable AUGUSTUS_CONFIG_PATH.
+BRAKER2 requires this directory to be in a writable location, so if that is not the case, copy this directory to a writable location, e.g.:
+cp -r /opt/conda/envs/braker/config/ /absolute_path_to_user_writable_directory/
+export AUGUSTUS_CONFIG_PATH=/absolute_path_to_user_writable_directory/config
+
+Due to license and distribution restrictions, GeneMark and ProtHint should be additionally installed for BRAKER2 to fully work.
+These packages can be either installed as part of the BRAKER2 environment, or the PATH variable should be configured to point to them.
+The GeneMark key should be located in /public1/home/sca2822/.gm_key and GENEMARK_PATH should include the path to the GeneMark executables.
+
+
+
+fastp 5个线程最优，再增加线程数不能显著增加速度
+
+
+
+perldoc -l YAML  # 查看perl YAML 模块的位置
+
+
+
+
+samtools faidx Atropa_belladonna_hifiasm.bp.p_ctg.fasta
+
+samtools faidx Atropa_belladonna_hifiasm.bp.p_ctg.fasta --fai-idx Atropa_belladonna_hifiasm.bp.p_ctg.fasta.fai -r id -o Atropa_belladonna_hifiasm_.fasta
+
+samtools view -@ 5 -h -b Atropa_belladonna_hifiasm_Atropa_belladonna_FB_1_sorted.bam HiC_scaffold_12 > Atropa_belladonna_hifiasm_Atropa_belladonna_FB_1_HiC_scaffold_12.sorted.bam
+ 
+
+samtools fastq -@ 8 target.region.bam \
+-1 SAMPLE_R1.fastq.gz \
+-2 SAMPLE_R2.fastq.gz \
+-0 /dev/null -s /dev/null -n
+
+
+
+#取出两个文件中相同的行，并以2.txt出现的顺序排序。
+grep -wf 1.txt 2.txt
+#取出对比2.txt中不同的行
+grep -wvf 2.txt 1.txt
+
+## SRR file to fastq file 
+## --split-3 3-way splitting for mate-pairs. For each spot, if there are two biological reads satisfying filter conditions, the first is placed in the `*_1.fastq` file, and the second is placed in the `*_2.fastq file. If there is only one biological read satisfying the filter conditions, it is placed in the `*.fastq` file.All ther reads in the spot are ignored.
+fastq-dump --split-3 SRR9888539.1
+##### for SRA data, trim header to avoid errors in trinity
+awk '{if($1~/@SRR/){print "@"$2}else{print $0}}' SRR9888539_1.fastq > SRR9888539_1_remove_SRR.fastq
+awk '{if($1~/@SRR/){print "@"$2}else{print $0}}' SRR9888539_2.fastq > SRR9888539_2_remove_SRR.fastq
+###在fastq文件的reads名后加上”/1“或者”/2“
+awk '{if(NR%4==1) {print $1"/1"} else {print} }' SRR9888539_1_remove_SRR.fastq > SRR9888539_1_remove_SRR_add.fastq
+awk '{if(NR%4==1) {print $1"/2"} else {print} }' SRR9888539_2_remove_SRR.fastq > SRR9888539_2_remove_SRR_add.fastq
+
+
+awk中怎样用变量
+引用变量时应先双引再单引
+awk '{print $1"\t"$2"\t"$3"\t""'${i}'"}' test
+打印单引号先双引再单引加上\
+awk '{print "'\''"$1"'\'': '\''"$2"'\'',"}' test.txt          "
+
+#Sed 
+#每一行都复制成两行：sed 's/.*/&\n&/'
+sed -i 's/    - '\"'RNA'\"'/    - '\"'Tubocapsicum_anomalum_ST_3'\"'/g' config.yaml 
+#错误：
+Sed 's/\.\///public1/home/sca2822/SolanaceaeGenomeAnalyze/00_GenomeAssembly/00_AssemblyResult/hifi_hic_asm/g' to_sz_list
+#正确：
+sed 's/\.\//public1\/home\/sca2822\/SolanaceaeGenomeAnalyze\/00_GenomeAssembly\/00_AssemblyResult\/hifi_hic_asm\//g' to_sz_list
+
+
+
+## 安装perl软件
+perl Makefile.PL 
+make
+make install DESTDIR=path
+
+
+awk 'BEGIN{sum=0}{sum+=$5}END{print sum}'
+# 修改一列的值
+awk '($3="match"){print}' OFS='\t'
+
+pasa对于大基因组使用blat和gmap都不行
+
+
+# 分割成一条序列一个文件
+seqkit split -s 1 -O genemark_out ../../00_ref_genome/Solanum_scabrum_hifiasm.bp.p_ctg.fasta
+
+#查看父进程
+ps -auxf
+
+# Windows文件转成linux
+dos2unix file
+
+# 过滤空白行和注释行
+grep -Ev '^#|^$' file_1 > file_2
+
+https://blog.csdn.net/loft_/article/details/105327425?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.fixedcolumn&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.fixedcolumn
+
+
+
+awk '{print "sed -i ""'\''""s/"$2"/"$1"/g""'\''"" Atropa_belladonna.Primary.gff3"}' test > test.sh
+
 
 
 
