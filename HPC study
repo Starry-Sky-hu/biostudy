@@ -167,7 +167,10 @@ awk '{print "sed -i ""'\''""s/"$2"/"$1"/g""'\''"" Atropa_belladonna.Primary.gff3
 
 
 
-
+#conda迁移环境
+# -n 后面的参数是服务器A要克隆的环境名称
+conda env export -n env_name > environment.yaml
+conda env create -n env_name -f environment.yaml
 
 
 
