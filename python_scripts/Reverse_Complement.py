@@ -23,3 +23,4 @@ for i in range(len(ori)):
 		with open(rev_file, 'a') as f:
 			f.writelines(reverseComplement(ori[i].strip()) + '\n')
 
+
